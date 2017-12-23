@@ -3,7 +3,7 @@
 
 // CONFIG
 var siteName = "Kissanime"
-var rootUrl = 'http://kissanime.com'
+var rootUrl = 'http://kissanime.ru'
 var URL = window.location.origin
 // END CONFIG
 
@@ -36,14 +36,14 @@ do {
 	}
 } while(true);
 
-var videoQuality = prompt(
+/*var videoQuality = prompt(
 	"Enter video quality preferences for the download. Example - '720,480'\nThis first looks for 720p, if 720 is not available, it picks 480.", 
 	defaultText="720,480"
 );
 
 if (videoQuality == null){
 	videoQuality = "720,480,360";
-}
+}*/
 
 var opOptions = prompt(
 	"How do you want output to be?\n0 = simple list of links\n1 = List with filenames (for wget, aria2 helper scripts)\n2 = HTML page with links",
@@ -71,7 +71,7 @@ for (i = (episodeLinks.length - startEpisode); i >= (episodeLinks.length - endEp
 			// console.log(result.search("Save link as"));
 			// console.log(result.search("divDownload"));
 
-			var data = $(result).find("#divDownload");  // download data
+			var data = $(result).find("#my_video_1_html5_api");  // download data
 			var links = $(data[0]).find("a");
 
 			if (data == null || data == "" || data.length == 0){ // captcha maybe
@@ -84,18 +84,18 @@ for (i = (episodeLinks.length - startEpisode); i >= (episodeLinks.length - endEp
 			}
 			// console.log(links);
 			
-			var quals = videoQuality.split(',');
+//			var quals = videoQuality.split(',');
 			var found = false;
 			// pick download
-			for (var j=0; j<quals.length; j++){
+			/*for (var j=0; j<quals.length; j++){
 				// check if the format exists or not
 				if (found)
 					return;
 
-				$.each(links, function(index, el) {
+				$.each(data, function(index, el) {
 					// console.log(el);
-					if ( $(el).html().search(quals[j]) > -1 ){
-						long_url = $(el).attr('href');
+					if ( $(el).html().search(quals[j]) > -1 ){*/
+						long_url = $(el).attr('src');
 						name = getDownloadName(episodeNames[i], $(el).html());
 						if (opOptions == "1"){
 							linkStr += encodeURI(long_url) + " " + name + "\n";
@@ -107,9 +107,9 @@ for (i = (episodeLinks.length - startEpisode); i >= (episodeLinks.length - endEp
 						found = true;
 						// console.log('Episode ' + (episodeLinks.length - i));
 						console.log(long_url);
-					}
+					/*}
 				});
-			}
+			}*/
 			// successful response processed
 		},
 		error: function(xhr, textStatus, errorThrown ) {
@@ -134,7 +134,6 @@ download("links." + ((opOptions == '2') ? 'html' : 'txt'), (opOptions == '2') ? 
 // http://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
 function download(filename, datatype, text) {
 	var element = document.createElement('a');
-	element.setAttribute('href', 'data:' + datatype + ';charset=utf-8,' + encodeURIComponent(text));
 	element.setAttribute('download', filename);
 	// element.setAttribute('target', '_blank');
 	// ^^ problems with safari
