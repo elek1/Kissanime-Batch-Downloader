@@ -74,7 +74,7 @@ for (i = (episodeLinks.length - startEpisode); i >= (episodeLinks.length - endEp
 			console.log(result.search("my_video_1_html5_api"));
 			console.log(URL + episodeLinks[i]);
 
-			var data = $(result).find("#my_video_1_html5_api");  // download data
+			var data = $(result).find("my_video_1_html5_api");  // download data
 			var links = $(data[0]).find("a");
 
 			if (data == null || data == "" || data.length == 0){ // captcha maybe
