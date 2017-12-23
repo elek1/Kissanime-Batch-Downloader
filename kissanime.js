@@ -70,6 +70,8 @@ for (i = (episodeLinks.length - startEpisode); i >= (episodeLinks.length - endEp
 			
 			// console.log(result.search("Save link as"));
 			// console.log(result.search("divDownload"));
+			console.log(result.search("#my_video_1_html5_api"));
+			console.log(result.search("my_video_1_html5_api"));
 
 			var data = $(result).find("#my_video_1_html5_api");  // download data
 			var links = $(data[0]).find("a");
@@ -90,11 +92,11 @@ for (i = (episodeLinks.length - startEpisode); i >= (episodeLinks.length - endEp
 			/*for (var j=0; j<quals.length; j++){
 				// check if the format exists or not
 				if (found)
-					return;
+					return;*/
 
 				$.each(data, function(index, el) {
 					// console.log(el);
-					if ( $(el).html().search(quals[j]) > -1 ){*/
+//					if ( $(el).html().search(quals[j]) > -1 ){
 						long_url = $(el).attr('src');
 						name = getDownloadName(episodeNames[i], $(el).html());
 						if (opOptions == "1"){
@@ -107,9 +109,9 @@ for (i = (episodeLinks.length - startEpisode); i >= (episodeLinks.length - endEp
 						found = true;
 						// console.log('Episode ' + (episodeLinks.length - i));
 						console.log(long_url);
-					/*}
+//					}
 				});
-			}*/
+//			}
 			// successful response processed
 		},
 		error: function(xhr, textStatus, errorThrown ) {
